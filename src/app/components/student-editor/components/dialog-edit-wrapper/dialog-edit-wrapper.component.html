@@ -1,0 +1,47 @@
+<!-- <p>dialog-edit-wrapper works!</p> -->
+<!-- <h1>Student editor</h1> -->
+
+<!-- <pre>{{editingStudent.id}}   {{editingStudent.name}}   {{editingStudent.surname}}</pre>
+<br/>
+<tr colspan="3">
+  <td>
+    <input [(ngModel)]="editingStudent.id" type="text">
+  </td>
+  <td>
+<input [(ngModel)]="editingStudent.name" type="text">
+</td>
+<td>
+<input [(ngModel)]="editingStudent.surname" type="text">
+</td>
+ <br/> -->
+<!-- <td>
+<button (click)="addStudent()">Add new student</button>
+</td>
+</tr> -->
+<h1 mat-dialog-title>Add student</h1>
+<div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
+<!--
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="ID of student"
+      [(ngModel)]="editingStudent.id" required>
+  </mat-form-field> -->
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="FIO of student"
+      [(ngModel)]="editingStudent.fio" required>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Group of student"
+      [(ngModel)]="editingStudent.group" required>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Number of student"
+      [(ngModel)]="editingStudent.phoneNumber" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button class="right-align" mat-raised-button color="primary"
+    [mat-dialog-close]="editingStudent">Add</button>
+    <!-- <button (click)="addStudent()">Add new student</button> -->
+</div>

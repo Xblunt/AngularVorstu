@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Edit student</h1>
+<div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
+
+
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="FIO of student"
+      [(ngModel)]="editingStudent.fio" required>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Group of student"
+      [(ngModel)]="editingStudent.group" required>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Number of student"
+      [(ngModel)]="editingStudent.phoneNumber" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button class="custom-btn btn-1"  (click)="onNoClick()">Cancel</button>
+  <button class="right-align custom-btn btn-1"   mat-raised-button color="primary"
+    [mat-dialog-close]="editingStudent">Edit</button>
+
+    <!-- <button (click)="editStudent()">Edit</button> -->
+
+</div>

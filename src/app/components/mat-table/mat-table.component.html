@@ -1,0 +1,49 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort >
+    <!-- (matSortChange)="announceSortChange($event)"> -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let student"> {{student.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="FIO">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> FIO </th>
+      <td mat-cell *matCellDef="let student"> {{student.fio}} </td>
+    </ng-container>
+
+    <!-- Surname Column -->
+    <ng-container matColumnDef="Group">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Group </th>
+      <td mat-cell *matCellDef="let student"> {{student.group}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Number </th>
+      <td mat-cell *matCellDef="let student"> {{student.phoneNumber}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let student">
+        <div>
+          <button  class="custom-btn btn-1" (click)="editStudent(student)">Edit</button>
+          <button  class="custom-btn btn-1" (click)="deleteStudent(student)">Delete</button>
+        </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+
+  <button  class="custom-btn btn-1" (click)="addNewStudent()">Add</button>
+  <mat-paginator [pageSizeOptions]="[2, 4, 8]"></mat-paginator>
+</div>
+
+
