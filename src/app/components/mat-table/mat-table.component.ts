@@ -20,7 +20,7 @@ import { DialogDeleteComponent } from '../student-editor/components/dialog-delet
 })
 export class MatTableComponent  implements  AfterViewInit {
 
-  displayedColumns: string[] = ['Id', 'FIO', 'Group', 'Number', 'action'];
+  displayedColumns: string[] = ['id', 'fio', 'group', 'phoneNumber', 'action'];
   dataSource = new MatTableDataSource<Student>([]);
 
   constructor(private baseService: BaseServiceService, private _liveAnnouncer: LiveAnnouncer,
