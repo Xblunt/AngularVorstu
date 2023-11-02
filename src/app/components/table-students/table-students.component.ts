@@ -14,6 +14,11 @@ import { DialogDeleteComponent } from '../student-editor/components/dialog-delet
 export class TableStudentsComponent implements OnInit {
 
   students: Student[];
+  currentPage: number = 0;
+  pageSize: number = 2;
+  sortBy: string = 'id';
+  totalPages: number = 0;
+  totalElements: number = 0;
 
   constructor(private baseService: BaseServiceService, public dialog: MatDialog) { }
 
@@ -42,7 +47,7 @@ export class TableStudentsComponent implements OnInit {
 
 ngOnInit() {
   console.log("TableStudentsComponent");
-  this.baseService.getAllStudents().subscribe(data => this.students = data);
+  this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content);
 }
 addNewStudent() {
   const dialogAddingNewStudent = this.dialog.open(DialogEditWrapperComponent, {
@@ -53,7 +58,7 @@ addNewStudent() {
     if(result != null) {
       console.log("adding new student: " + result.fio);
       this.baseService.addNewStudent(result).subscribe(k=>
-        this.baseService.getAllStudents().subscribe(data => this.students = data) );
+        this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content) );
     }
   });
 }
@@ -68,7 +73,7 @@ editStudent(student: Student) {
     // debugger
       console.log("edit student: " + student.fio);
       this.baseService.editStudent(student).subscribe(k=>
-        this.baseService.getAllStudents().subscribe(data => this.students = data) );
+        this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content) );
     }
   });
 }
@@ -83,7 +88,7 @@ deleteStudent(student: Student){
     if(confirmDelete) {
       console.log("delete student: ");
       this.baseService.deleteStudent(student).subscribe(k=>
-        this.baseService.getAllStudents().subscribe(data => this.students = data) );
+        this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content) );
     }
   });
 }

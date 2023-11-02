@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../models/student';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
+import { PageEvent } from '@angular/material/paginator';
+import { Page } from 'src/app/service/page';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +15,7 @@ export class BaseServiceService {
   //   {id: 2, name: 'Имя 2', surname: 'Фамилия 2'}
   // ];
   private studentsUrl = 'api/base/students';
+
 
   constructor(private http: HttpClient) { }
   // getAllStudents(): Student[] {
@@ -28,10 +32,41 @@ export class BaseServiceService {
   //   this.students.splice(0,1);
   //   // alert(students);
   // }
-  getAllStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.studentsUrl);
-  }
 
+//   nextPage(event: PageEvent) {
+//     const params = new HttpParams()
+//     .set('page', event.pageIndex.toString())
+//     .set('size', event.pageSize.toString());
+//     this.getAllStudents();
+// }
+// getAllStudents(page: number, size: number): Observable<Page<Student>> {
+//   const params = new HttpParams()
+//     .set('page', page.toString())
+//     .set('size', size.toString());
+
+//   return this.http.get<Page<Student>>(this.studentsUrl, { params });
+// }
+
+
+// nextPage(event: PageEvent) {
+//   this.getAllStudents(event.pageIndex, event.pageSize)
+//     .subscribe((page: Page<Student>) => {
+
+//       console.log(page.content);
+//     });
+// }
+
+getAllStudents(page: number, size: number): Observable<Page<Student>> {
+  let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+
+
+  return this.http.get<Page<Student>>(this.studentsUrl, { params });
+}
+// getAllStudents(): Observable<Student[]> {
+//   return this.http.get<Student[]>(this.studentsUrl);
+// }
   addNewStudent(student: Student): Observable<Student> {
     console.log('addNewStudent');
     return this.http.post<Student>(this.studentsUrl, student).pipe();

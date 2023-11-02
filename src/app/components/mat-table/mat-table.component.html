@@ -43,7 +43,10 @@
 
 
   <button  class="custom-btn btn-1" (click)="addNewStudent()">Add</button>
-  <mat-paginator [pageSizeOptions]="[2, 4, 8]"></mat-paginator>
+  <!-- <mat-paginator [pageSizeOptions]="[2, 4, 8]" [pageSize]="2" ></mat-paginator> -->
+  <mat-paginator [length]="totalPages" [pageSize]="pageSize" [pageSizeOptions]="[2, 4, 8]"
+    (page)="updatePageSize($event)"></mat-paginator>
+    <!-- <mat-paginator [pageSizeOptions]="[2, 4, 8]" [pageSize]="2" showFirstLastButtons></mat-paginator> -->
 </div>
 
 
