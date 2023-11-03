@@ -27,9 +27,10 @@ export class MatTableComponent  implements  AfterViewInit {
   dataSource = new MatTableDataSource<Student>([]);
   currentPage: number = 0;
   pageSize: number = 2;
-  sortBy: string = 'id';
+  // sortBy: string = 'id';
   totalPages: number = 0;
   totalElements: number = 0;
+  length!: number;
 
   constructor(private baseService: BaseServiceService, private _liveAnnouncer: LiveAnnouncer,
     public dialog:MatDialog, private http: HttpClient) {
@@ -69,17 +70,32 @@ export class MatTableComponent  implements  AfterViewInit {
 //   });
 // }
 ngOnInit(): void {
+
   this.getAllStudents();
 }
   getAllStudents(): void {
     this.baseService.getAllStudents(this.currentPage, this.pageSize)
       .subscribe((page: Page<Student>) => {
+
         this.dataSource.data = page.content;
+
         this.totalPages = page.totalPages;
+        // debugger;
+        // this.currentPage = page.currentPage;
+
         this.totalElements = page.totalElements;
+        // this.dataSource._updatePaginator(page.totalElements);
+
         // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
       });
+  }
+
+  updatePageSize(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.getAllStudents();
   }
 // onPageChange(event: PageEvent) {
 //   this.pageSize = event.pageSize;
@@ -88,6 +104,7 @@ ngOnInit(): void {
 // }
 
 // nextPage(): void {
+//   debugger;
 //   if (this.currentPage + 1 < this.totalPages) {
 //     this.currentPage++;
 //     this.getAllStudents();
@@ -100,18 +117,14 @@ ngOnInit(): void {
 //     this.getAllStudents();
 //   }
 // }
-// updatePageSize(): void {
+// // updatePageSize(): void {
 //   if (this.currentPage % 2 === 0) {
 //     this.pageSize = this.currentPage + 2;
 //   } else {
 //     this.pageSize = 2;
 //   }
 // }
-updatePageSize(event: PageEvent): void {
-  this.pageSize = event.pageSize;
-  this.currentPage = event.pageIndex;
-  this.getAllStudents();
-}
+
 // nextPage(): void {
 //   if (this.currentPage + 1 < this.totalPages) {
 //     this.currentPage++;

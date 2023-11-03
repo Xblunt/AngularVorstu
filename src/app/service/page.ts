@@ -6,13 +6,13 @@ export class Page<Student> {
   totalPages: number;
   currentPage: number;
   size: number;
-  number: number;
-  constructor(content: Student[], totalPages: number, totalElements: number, size: number, number: number) {
-    this.content = content;
-    this.totalPages = totalPages;
-    this.totalElements = totalElements;
-    this.size = size;
-    this.number = number;
-  }
+  page: number;
+  // constructor(content: Student[], totalPages: number, totalElements: number, size: number, number: number) {
+  //   this.content = content;
+  //   this.totalPages = totalPages;
+  //   this.totalElements = totalElements;
+  //   this.size = size;
+  //   this.number = number;
+  // }
 }
 
