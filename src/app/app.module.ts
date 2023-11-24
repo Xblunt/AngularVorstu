@@ -21,6 +21,14 @@ import { MatTableComponent } from './components/mat-table/mat-table.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { SessionStorageService } from 'angular-web-storage';
+import { BaseServiceService } from './service/base-service.service';
+import { AdminComponent } from './components/home/admin/admin.component';
+import { StudentComponent } from './components/home/student/student.component';
+import { HomeComponent } from './components/home/home/home.component';
+import { LoginComponent } from './components/home/login/login.component';
+import { MatButtonModule } from '@angular/material/button';
+import { TeacherComponent } from './components/home/teacher/teacher.component';
 
 
 @NgModule({
@@ -31,7 +39,12 @@ import { MatSortModule } from '@angular/material/sort';
     DialogEditWrapperComponent,
     DialogEditComponent,
     DialogDeleteComponent,
-    MatTableComponent
+    MatTableComponent,
+    AdminComponent,
+    StudentComponent,
+    HomeComponent,
+    LoginComponent,
+    TeacherComponent
   ],
   imports: [
     BrowserModule,
@@ -45,11 +58,13 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule,
     HttpClientModule,
+    MatButtonModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
   ],
-  providers: [],
+  // providers: [],
+  providers: [BaseServiceService, SessionStorageService],
   bootstrap: [AppComponent]
   // entryComponents: [
   //   DialogEditWrapperComponent

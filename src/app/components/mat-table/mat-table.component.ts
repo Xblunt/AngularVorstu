@@ -12,7 +12,8 @@ import { DialogEditComponent } from '../student-editor/components/dialog-edit/di
 import { DialogDeleteComponent } from '../student-editor/components/dialog-delete/dialog-delete.component';
 import { HttpClient } from '@angular/common/http';
 import { Page } from 'src/app/service/page';
-
+import { AuthService } from 'src/app/auth/auth.service';
+import { CredentialResponse } from 'src/app/auth/model/auth/credentialResponse';
 
 @Component({
   selector: 'app-mat-table',
@@ -22,18 +23,19 @@ import { Page } from 'src/app/service/page';
 })
 export class MatTableComponent  implements  AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'fio', 'group', 'phoneNumber', 'action'];
-
-  dataSource = new MatTableDataSource<Student>([]);
+  // displayedColumns: string[] = ['id', 'fio', 'group', 'phoneNumber', 'action'];
+  displayedColumns: string[] = ['id',  'name', 'surname', 'action'];
+  dataSource = new MatTableDataSource<Student>();
   currentPage: number = 0;
   pageSize: number = 2;
   // sortBy: string = 'id';
   totalPages: number = 0;
   totalElements: number = 0;
   length!: number;
+  sortBy: string = 'user_id';
 
   constructor(private baseService: BaseServiceService, private _liveAnnouncer: LiveAnnouncer,
-    public dialog:MatDialog, private http: HttpClient) {
+    public dialog:MatDialog, private http: HttpClient, private authService:AuthService) {
       // this.baseService.getAllStudents().subscribe(data => this.dataSource = new MatTableDataSource(data));
 
     }
@@ -74,9 +76,9 @@ ngOnInit(): void {
   this.getAllStudents();
 }
   getAllStudents(): void {
-    this.baseService.getAllStudents(this.currentPage, this.pageSize)
+    this.authService.getAllUsersAdmin(this.currentPage, this.pageSize,  this.sort.active,this.sort.direction)
       .subscribe((page: Page<Student>) => {
-
+        console.log(page);
         this.dataSource.data = page.content;
 
         this.totalPages = page.totalPages;
@@ -156,7 +158,7 @@ ngOnInit(): void {
     });
     dialogAddingNewStudent.afterClosed().subscribe((result: Student) => {
       if(result != null) {
-        console.log("adding new student: " + result.fio);
+        console.log("adding new student: " + result.name);
         this.baseService.addNewStudent(result).subscribe(k=>
           this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.dataSource.data = data.content) );
       }
@@ -165,13 +167,14 @@ ngOnInit(): void {
   editStudent(student: Student) {
     const dialogAddingNewStudent = this.dialog.open(DialogEditComponent, {
       width: '700px',
-      data: {id: student.id, fio: student.fio, group: student.group, phoneNumber: student.phoneNumber}
+      // data: {id: student.id, fio: student.fio, group: student.group, phoneNumber: student.phoneNumber}
+    data: {id: student.user_id, name:student.name, surname: student.surname}
     });
     dialogAddingNewStudent.afterClosed().subscribe((student: Student) => {
       // debugger
       if(student != null) {
       // debugger
-        console.log("edit student: " + student.fio);
+        console.log("edit student: " + student.name);
         this.baseService.editStudent(student).subscribe(k=>
           this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.dataSource.data = data.content) );
       }

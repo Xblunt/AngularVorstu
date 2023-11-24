@@ -13,7 +13,7 @@ export class DialogDeleteComponent  implements OnInit {
   // editingStudent: Student;
   // students: Student[];
   constructor(public dialogRef: MatDialogRef<DialogDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private baseService: BaseServiceService) {
+    @Inject(MAT_DIALOG_DATA) public data: Student, private baseService: BaseServiceService) {
 
 
         // this.lName = this.editingStudent.name;

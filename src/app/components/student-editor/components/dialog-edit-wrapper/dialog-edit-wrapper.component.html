@@ -27,17 +27,21 @@
       [(ngModel)]="editingStudent.id" required>
   </mat-form-field> -->
   <mat-form-field class="full-width-input">
-    <input matInput type="text" placeholder="FIO of student"
-      [(ngModel)]="editingStudent.fio" required>
+    <input matInput type="text" placeholder="Login of student"
+      [(ngModel)]="editingStudent.name" required>
   </mat-form-field>
   <mat-form-field class="full-width-input">
-    <input matInput type="text" placeholder="Group of student"
-      [(ngModel)]="editingStudent.group" required>
+    <input matInput type="text" placeholder="Name of student"
+      [(ngModel)]="editingStudent.username" required>
   </mat-form-field>
   <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Surname of student"
+      [(ngModel)]="editingStudent.surname" required>
+  </mat-form-field>
+  <!-- <mat-form-field class="full-width-input">
     <input matInput type="text" placeholder="Number of student"
       [(ngModel)]="editingStudent.phoneNumber" required>
-  </mat-form-field>
+  </mat-form-field> -->
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()">Cancel</button>

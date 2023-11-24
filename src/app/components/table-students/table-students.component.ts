@@ -56,7 +56,7 @@ addNewStudent() {
   });
   dialogAddingNewStudent.afterClosed().subscribe((result: Student) => {
     if(result != null) {
-      console.log("adding new student: " + result.fio);
+      console.log("adding new student: " + result.name);
       this.baseService.addNewStudent(result).subscribe(k=>
         this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content) );
     }
@@ -65,13 +65,13 @@ addNewStudent() {
 editStudent(student: Student) {
   const dialogAddingNewStudent = this.dialog.open(DialogEditComponent, {
     width: '700px',
-    data: {id: student.id, fio: student.fio, group: student.group, phoneNumber: student.phoneNumber}
+    data: {id: student.user_id, fio: student.name, group: student.surname}
   });
   dialogAddingNewStudent.afterClosed().subscribe((student: Student) => {
     // debugger
     if(student != null) {
     // debugger
-      console.log("edit student: " + student.fio);
+      console.log("edit student: " + student.name);
       this.baseService.editStudent(student).subscribe(k=>
         this.baseService.getAllStudents(this.currentPage, this.pageSize).subscribe(data => this.students = data.content) );
     }

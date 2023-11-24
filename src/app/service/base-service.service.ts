@@ -14,7 +14,8 @@ export class BaseServiceService {
   //   {id: 1, name: 'Имя 1', surname: 'Фамилия 1'},
   //   {id: 2, name: 'Имя 2', surname: 'Фамилия 2'}
   // ];
-  private studentsUrl = 'api/base/students';
+  private studentsUrl = 'api/home';
+  private adminUrl = 'api/admin';
 
 
   constructor(private http: HttpClient) { }
@@ -62,21 +63,29 @@ getAllStudents(page: number, size: number): Observable<Page<Student>> {
     .set('size', size.toString())
 
 
-  return this.http.get<Page<Student>>(this.studentsUrl, { params });
+  return this.http.get<Page<Student>>(this.studentsUrl + "/users", { params });
+}
+getAllStudentsAdmin(page: number, size: number): Observable<Page<Student>> {
+  let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+
+
+  return this.http.get<Page<Student>>(this.adminUrl + "/users", { params });
 }
 // getAllStudents(): Observable<Student[]> {
 //   return this.http.get<Student[]>(this.studentsUrl);
 // }
   addNewStudent(student: Student): Observable<Student> {
     console.log('addNewStudent');
-    return this.http.post<Student>(this.studentsUrl, student).pipe();
+    return this.http.post<Student>(this.adminUrl, student).pipe();
   }
   editStudent(student: Student): Observable<Student> {
     console.log('editStudent');
-    return this.http.put<Student>(this.studentsUrl, student).pipe();
+    return this.http.put<Student>(this.adminUrl, student).pipe();
   }
   deleteStudent(student: Student): Observable<Student> {
-    console.log(student.id);
-    return this.http.delete<Student>(this.studentsUrl + '/' + student.id).pipe();
+    console.log(student.user_id);
+    return this.http.delete<Student>(this.adminUrl + '/' + student.user_id).pipe();
   }
 }
