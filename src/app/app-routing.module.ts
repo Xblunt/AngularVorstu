@@ -6,6 +6,7 @@ import { AdminComponent } from './components/home/admin/admin.component';
 import { StudentComponent } from './components/home/student/student.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TeacherComponent } from './components/home/teacher/teacher.component';
+import { TripleComponent } from './components/home/triple/triple.component';
 
 const routes: Routes = [ {
   path: '',
@@ -17,17 +18,17 @@ const routes: Routes = [ {
   },
     {
     path: 'admin',
-    component: AdminComponent,
+    component: TripleComponent,
     canActivate: [AuthGuard]
     },
     {
     path: 'student',
-    component: StudentComponent,
+    component: TripleComponent,
     canActivate: [AuthGuard]
     },
     {
       path: 'teacher',
-      component: TeacherComponent,
+      component: TripleComponent,
       canActivate: [AuthGuard]
       }
   ];

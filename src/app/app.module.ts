@@ -29,6 +29,7 @@ import { HomeComponent } from './components/home/home/home.component';
 import { LoginComponent } from './components/home/login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TeacherComponent } from './components/home/teacher/teacher.component';
+import { TripleComponent } from './components/home/triple/triple.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TeacherComponent } from './components/home/teacher/teacher.component';
     StudentComponent,
     HomeComponent,
     LoginComponent,
-    TeacherComponent
+    TeacherComponent,
+    TripleComponent
   ],
   imports: [
     BrowserModule,
